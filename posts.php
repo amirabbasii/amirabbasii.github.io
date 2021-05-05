@@ -36,6 +36,23 @@
 </head>
 
 <body>
+
+ <?php
+ echo $_POST["back"];
+ if($_POST["back"]=="Back") {
+        
+              header('Location: blog.php');
+       
+        }
+?>
+<?php
+$img=$_REQUEST["img"];
+$post=$_REQUEST["post"];
+
+$myfile = fopen("blog/posts/$post", "r") or die("File not Found!");
+$amir=fread($myfile,filesize("blog/posts/$post"));
+fclose($myfile);
+?> 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container-fluid d-flex justify-content-between align-items-center">
@@ -75,47 +92,20 @@
     <section id="resume" class="resume">
       <div class="container" data-aos="fade-up">
 
-        <div class="section-title">
-          <h2>Scientific</h2>
-          
-        </div>
-<!--
-        <div<!-- class="row">
-          <div class="col-lg-12">
-            <h3 class="resume-title"></h3>
-            <div class="resume-item pb-0">
-              <h4>Law of effect</h4>
-                <img src="assets/img/blog/cat.jpg" alt="" class="img-fluid" width=500 height=100>
-<!--                 <p><em>Computers in Biology and Medicine</em></p> -->
-<!--                 <a href="https://doi.org/10.1016/j.compbiomed.2020.104121">https://doi.org/10.1016/j.compbiomed.2020.104121</a> -->
-<!--                 <br/> -->
-<!--                 <br/> -->
-<!--                <h5>Jan 2020</h5> -->
-         
-              
- 
-<!--               </p> -->
-              
-              
-<!--             </div>-->
             <div class="section-title">
-          <h2>Personal</h2>
+            
+          <h2><?php echo  substr($amir,0,strpos($amir, "text:")); ?></h2>
+           
         <div<!-- class="row">
           <div class="col-lg-12">
-            <h3 class="resume-title"></h3>
-            <div class="resume-item pb-0">
-              <h4>Who are we?</h4>
-                <img src="assets/img/blog/pale-blue-dot.jpg" alt="" class="img-fluid" width=500 height=100><br>
-                <form method="post">
-        <input type="submit" name="button1"
-                value="Button1"/>
+                <?php echo "<img src=\"blog/img/$img\" alt=\"\" class=\"img-fluid\" ><br><br>";?>
+      		<p align="left"><?php echo  substr($amir,strpos($amir, "text:")+5); ?></p> 
+            <form method="post">
+           <input type="submit" name="back"
+                value="Back"/>
           
-        <input type="submit" name="button2"
-                value="Button2"/>
     </form>
-               </p> 
-              
-            </div>
+           
         </div>
 
 
@@ -124,15 +114,7 @@
 
   </main><!-- End #main -->
 
-   <?php
-      
-        if(isset($_POST['button1'])) {
-            echo "This is Button1 that is selected";
-        }
-        if(isset($_POST['button2'])) {
-            echo "This is Button2 that is selected";
-        }
-    ?>
+
 
   <div id="preloader"></div>
   <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
@@ -151,7 +133,7 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-
+<?php echo $_REQUEST["img"]; ?>
 </body>
 
 </html>

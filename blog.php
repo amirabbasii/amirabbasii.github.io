@@ -36,6 +36,8 @@
 </head>
 
 <body>
+
+
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container-fluid d-flex justify-content-between align-items-center">
@@ -79,43 +81,32 @@
           <h2>Scientific</h2>
           
         </div>
-<!--
-        <div<!-- class="row">
-          <div class="col-lg-12">
-            <h3 class="resume-title"></h3>
-            <div class="resume-item pb-0">
-              <h4>Law of effect</h4>
-                <img src="assets/img/blog/cat.jpg" alt="" class="img-fluid" width=500 height=100>
-<!--                 <p><em>Computers in Biology and Medicine</em></p> -->
-<!--                 <a href="https://doi.org/10.1016/j.compbiomed.2020.104121">https://doi.org/10.1016/j.compbiomed.2020.104121</a> -->
-<!--                 <br/> -->
-<!--                 <br/> -->
-<!--                <h5>Jan 2020</h5> -->
-         
-              
- 
-<!--               </p> -->
-              
-              
-<!--             </div>-->
+
             <div class="section-title">
           <h2>Personal</h2>
         <div<!-- class="row">
           <div class="col-lg-12">
             <h3 class="resume-title"></h3>
-            <div class="resume-item pb-0">
-              <h4>Who are we?</h4>
-                <img src="assets/img/blog/pale-blue-dot.jpg" alt="" class="img-fluid" width=500 height=100><br>
-                <form method="post">
-        <input type="submit" name="button1"
-                value="Button1"/>
-          
-        <input type="submit" name="button2"
-                value="Button2"/>
-    </form>
-               </p> 
-              
-            </div>
+             <?php
+ $files = array_diff(scandir('blog/img/'), array('.', '..'));
+ $img=array_values($files);
+  $files = array_diff(scandir('blog/posts/'), array('.', '..'));
+ $subject=array_values($files);
+
+for ($x = 0; $x <count($subject); $x++) {
+
+echo "<div class=\"resume-item pb-0\">";
+  $title=str_replace("_", " ", $subject[$x]);
+  echo "<html><h4>$title</h4></html>";
+  echo "<img src=\"blog/img/$img[$x]\" alt=\"\" class=\"img-fluid\" width=500 height=100><br>";
+  echo "<a href=posts.php?img=$img[$x]&post=$subject[$x]>Show the post</a>";
+  echo ' </div>';
+  echo '<br><br><br><br>';
+}
+?> 
+             
+                  
+           
         </div>
 
 
@@ -124,15 +115,7 @@
 
   </main><!-- End #main -->
 
-   <?php
-      
-        if(isset($_POST['button1'])) {
-            echo "This is Button1 that is selected";
-        }
-        if(isset($_POST['button2'])) {
-            echo "This is Button2 that is selected";
-        }
-    ?>
+
 
   <div id="preloader"></div>
   <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
